@@ -28,6 +28,8 @@
 class Tokens:
     Lang = '$'
     Branch = '@'
+    OS = '?'
+
     Push = '+'
     Push5 = '*'
     Push10 = '/'
@@ -44,41 +46,43 @@ class TypeCode:
         # taken from https://www.quora.com/What-are-the-branches-of-computer-science
         self.__branches = []
 
+        self.__operating_systems = []
+
         self.__data: str = ''
-        self.__is_language, self.__is_branch = False, False
+        self.__is_language, \
+            self.__is_branch,\
+            self.__is_os = False, False, False
 
         self.__stack = 0
 
         self.info_languages = []
         self.info_branches = []
+        self.info_operating_systems = []
 
     def init(self, file_data: str):
         self.init_languages()
         self.init_branches()
+        self.init_operating_systems()
 
         for ch in file_data:
             # $+++++++;+++;$
             #
             # @+++++++++++++++;@
-            if ch == Tokens.Lang:
-                self.__is_language = not self.__is_language
-            elif ch == Tokens.Branch:
-                self.__is_branch = not self.__is_branch
-            elif ch == Tokens.Push:
-                self.__stack += 1
-            elif ch == Tokens.Push5:
-                self.__stack += 5
-            elif ch == Tokens.Push10:
-                self.__stack += 10
-            elif ch == Tokens.Push50:
-                self.__stack += 50
-            elif ch == Tokens.Push100:
-                self.__stack += 100
+            if ch == Tokens.Lang: self.__is_language = not self.__is_language
+            elif ch == Tokens.Branch: self.__is_branch = not self.__is_branch
+            elif ch == Tokens.OS: self.__is_os = not self.__is_os
+            elif ch == Tokens.Push: self.__stack += 1
+            elif ch == Tokens.Push5: self.__stack += 5
+            elif ch == Tokens.Push10: self.__stack += 10
+            elif ch == Tokens.Push50: self.__stack += 50
+            elif ch == Tokens.Push100: self.__stack += 100
             elif ch == Tokens.Print:
                 if self.__is_branch and self.__stack < len(self.__branches):
                     self.info_branches.append(self.__branches[self.__stack])
                 elif self.__is_language and self.__stack < len(self.__languages):
                     self.info_languages.append(self.__languages[self.__stack])
+                elif self.__is_os and self.__stack < len(self.__operating_systems):
+                    self.info_operating_systems.append(self.__operating_systems[self.__stack])
 
                 self.__stack = 0
 
@@ -380,4 +384,143 @@ class TypeCode:
             'Scientific computing',
             'Software engineering',
             'Theory of computing'
+        ]
+
+    def init_operating_systems(self):
+        self.__operating_systems = [
+            'Arthur',
+            'RISC OS',
+            'Fire OS',
+            'Amiga OS',
+            'AMSDOS',
+            'macOS',
+            'iOS',
+            'iPadOS',
+            'tvOS',
+            'bridgeOS',
+            'Atari DOS',
+            'BeOS',
+            'Unix',
+            'BESYS',
+            'Plan 9',
+            'Inferno',
+            'Android',
+            'Harmony OS',
+            'LiteOS',
+            'iRMX',
+            'PC DOS',
+            'OS/2',
+            'Remix OS',
+            'KaiOS',
+            'LynxOS',
+            'Xenix',
+            'MS-DOS',
+            'DOS/V',
+            'Windows',
+                'Windows 1.0',
+                'Windows 2.0',
+                'Windows 3.0',
+                'Windows 3.1x',
+                'Windows 3.2',
+                'Windows 95',
+                'Windows 98',
+                'Windows ME',
+
+                'Windows NT',
+                    'Windows NT 3.1',
+                    'Windows NT 4.0',
+                    'Windows 2000',
+                    'Windows XP',
+                    'Windows Server 2003',
+                    'Windows Vista',
+                    'Windows Phone 7',
+                    'Windows 8',
+                    'Windows RT',
+                    'Windows Phone 8',
+                    'Windows 8.1',
+                    'Windows Phone 8.1',
+                    'Windows 10',
+                    'Windows 10 Mobile',
+                    'Windows 11',
+            'ES',
+            'NeXTSTEP',
+            'NetWare',
+            'UnixWare',
+            'Bada',
+            'Tizen',
+            'One UI',
+            'Sun OS',
+            'Solaris'
+            'BSD',
+                'FreeBSD',
+                    'DragonFlyBSD',
+                    'MidnightBSD',
+                    'GhostBSD',
+                    'TrueOS',
+                    'prismBSD',
+                'NetBSD',
+                    'OpenBSD',
+                        'Bitrig',
+                'Darwin',
+
+            'GNU Hurd',
+            'Linux',
+                'RHEL',
+                    'Rocky Linux'
+                'RPM',
+                    'Red Hat Linux',
+                    'CentOS',
+                    'Fedora',
+                        'Qubes OS'
+                    'openSUSE',
+                        'SUSE Linux Enterprise Desktop',
+                        'SUSE Linux Enterprise Server',
+                        'SUSE Studio',
+                        'GeckoLinux',
+                    'Mandrake Linux',
+                'Debian',
+                    'MX Linux',
+                    'Deepin',
+                    'Devuan',
+                    'Kali Linux',
+                    'Pure OS',
+                    'Ubuntu',
+                        'Kubuntu',
+                        'Lubuntu',
+                        'Ubuntu Budgie',
+                        'Ubuntu Kylin',
+                        'Ubuntu Mate',
+                        'Xubuntu',
+
+                        'Bodhi Linux',
+                        'elementary OS',
+                        'Linux Mint',
+                        'Zorin OS',
+                        'Pop!_OS',
+
+                'Arch Linux',
+                    'Manjaro',
+                    'Artix Linux',
+                    'EndeavourOS',
+                    'SteamOS',
+                'Gentoo',
+                    'Chrome OS',
+                    'Chromium OS',
+                'NixOS',
+                'Void Linux',
+                'GuixSD',
+                'Solus',
+            'Redox',
+            'illumos',
+                'OpenIndiana',
+
+            'FreeDOS',
+            'Genode',
+            'FFusionOS',
+            'Ghost OS',
+            'Haiku',
+            'ReactOS',
+            'TempleOS',
+            'Serenity',
+            'Visopsys'
         ]

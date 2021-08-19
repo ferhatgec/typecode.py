@@ -1,6 +1,6 @@
 import typecode
 
-x = '$%///*++;%////*++;///++++;///*++;///*+++;-%////*;$@/*+;+++;///;@'
+x = '$%///*++;%////*++;///++++;///*++;///*+++;-%////*;$@/*+;+++;///;@?-++;%/*++;?'
 
 q = typecode.TypeCode()
 q.init(x)
@@ -13,3 +13,8 @@ print('\n\x1b[0;92mBranches\x1b[0m:')
 
 for branch in q.info_branches:
     print(f'  {branch}')
+
+print('\n\x1b[0;92mOperating Systems\x1b[0m:')
+
+for os in q.info_operating_systems:
+    print(f'  {os}')
